@@ -23,8 +23,7 @@ length = len(cypertext)
 count = [0]*26
 for i in cypertext:
     if i in string.ascii_lowercase:
-        idx = ord(i) - ord('a')
-        count[idx] += 1
+        count[string.ascii_lowercase.index(i)] += 1
         
 
 freq_alphabet = [i / length for i in count]
@@ -40,18 +39,20 @@ for k in range(26):
     if best_score < score_k:
         best_score = score_k
         best_k = k
+    
+    print("k: ", k, " score: ", score_k)
 
 
 plantext = ""
 
 for j in cypertext:
     if j in string.ascii_lowercase:
-        idx = ord(j) - ord('a')
+        idx = string.ascii_lowercase.index(j)
         plantext += string.ascii_lowercase[(idx + best_k) % 26]
 
 
 
-print("Best k: ", best_k)
-print("Best score: ", best_score)
-print("Ciphertext: ", cypertext)
-print("Plaintext: ", plantext)
+print("\nBest k: ", best_k)
+print("\nBest score: ", best_score)
+print("\nCiphertext: ", cypertext)
+print("\nPlaintext: ", plantext)
